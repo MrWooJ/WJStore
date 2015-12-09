@@ -1,4 +1,4 @@
-﻿@model WJStore.Models.Product
+﻿@model Product
 
 @{
     ViewBag.Title = "Create";
@@ -51,7 +51,6 @@
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ProductArtUrl)
-            @Html.ValidationMessageFor(model => model.ProductArtUrl)
         </div>
 
         <p>
