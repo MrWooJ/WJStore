@@ -5,7 +5,7 @@ using WJStore.Domain.Entities;
 
 namespace WJStore.Data.Context.Config
 {
-    public class ContextInitializer : DropCreateDatabaseIfModelChanges<WJStoreContext>
+    public class ContextInitializer : DropCreateDatabaseAlways<WJStoreContext>
     {
         protected override void Seed(WJStoreContext context)
         {
