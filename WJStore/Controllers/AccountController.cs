@@ -42,7 +42,10 @@ namespace WJStore.Controllers
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
-                        return Redirect(returnUrl);
+                        if (returnUrl.ToLower().Contains("storemanager") && model.UserName.ToLower().Equals("administrator"))
+                            return Redirect(returnUrl);
+                        else
+                            return RedirectToAction("Index", "Home");
                     }
                     else
                     {
