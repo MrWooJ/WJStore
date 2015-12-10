@@ -1,14 +1,30 @@
 ﻿@model IEnumerable<Category>
-@{
-    ViewBag.Title = "Store";
-}
-<h3>Browse Categoris</h3>
-
-<p>
-    Select from @Model.Count() categories:</p>
-<ul>
-    @foreach (var category in Model)
-    {
-        <li>@Html.ActionLink(category.Name, "Browse", new { category = category.Name })</li>
+    @{
+        ViewBag.Title = "Store";
     }
-</ul>
+    <h3>Search Products</h3>
+    <p>
+        Search between Products:
+    </p>
+    <input id="1" type="text" name="msg" style="resize:none" onfocus="clearContents(this);" value="Search Product Here...">
+    <p>
+    <input type="submit" onclick="MyFunc(document.getElementById(1).value)" value="Search" />
+    <p>
+    <h3>Browse Categoris</h3>
+    <p>
+        Select from @Model.Count() categories:
+    </p>
+    <ul>
+        @foreach (var category in Model)
+        {
+            <li>@Html.ActionLink(category.Name, "Browse", new { category = category.Name })</li>
+        }
+    </ul>
+    <script type="text/javascript">
+        function MyFunc(text) {
+            window.location.href = "/Store/BrowseProduct?productStr=" + text
+        }
+        function clearContents(element) {
+            element.value = '';
+        }
+    </script>

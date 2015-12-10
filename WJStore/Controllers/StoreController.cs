@@ -41,6 +41,18 @@ namespace WJStore.Controllers
         }
 
         //
+        // GET: /Store/BrowseProduct?productStr=str
+
+        public ActionResult BrowseProduct(string productStr)
+        {
+            // Retrieve Products from database
+            var productItem = _productAppService.Find(
+                product => product.Title.ToLower().Contains(productStr.ToLower()));
+
+            return View(productItem);
+        }
+
+        //
         // GET: /Store/Details/5
 
         public ActionResult Details(int id)
