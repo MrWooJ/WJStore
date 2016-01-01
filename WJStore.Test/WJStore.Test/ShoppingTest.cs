@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 
@@ -54,6 +55,42 @@ namespace WJStore.Test.Controllers
             string firstItem = this.InternetExplorerDriver.FindElement(By.Id("firstItem")).FindElement(By.TagName("a")).Text;
 
             Assert.AreEqual(firstItem, "/Store/Details/1", true);
+        }
+
+        [TestMethod]
+        public void IndexLoadIETest()
+        {
+            Thread[] threads = new Thread[100];
+
+            for (int i = 0; i < threads.Length; i++)
+            {
+                threads[i] = new Thread(LoadTestFunction);
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Start();
+            }
+
+            foreach (Thread thread in threads)
+            {
+                thread.Join();
+            }
+        }
+
+        public void LoadTestFunction()
+        {
+            // Act
+            this.InternetExplorerDriver.Navigate().GoToUrl(this.GetAbsoluteUrl("/home/index"));
+
+            /* Store Process */
+            this.InternetExplorerDriver.FindElement(By.Id("Store")).Click();
+            this.InternetExplorerDriver.FindElement(By.Id("SearchTextBox")).SendKeys("apple");
+            this.InternetExplorerDriver.FindElement(By.Id("Search")).Click();
+            this.InternetExplorerDriver.Navigate().GoToUrl(this.GetAbsoluteUrl("/Store/Details/1"));
+
+            /* Add to Cart */
+            this.InternetExplorerDriver.FindElement(By.Id("AddToCart")).Click();
         }
     }
 }
