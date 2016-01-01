@@ -8,8 +8,8 @@
     </p>
     <input id="1" type="text" name="msg" style="resize:none" onfocus="clearContents(this);" value="Search Product Here...">
     <p>
-    <input type="submit" onclick="MyFunc(document.getElementById(1).value)" value="Search" />
-    <p>
+    <input id="Search" type="submit" onclick="MyFunc(document.getElementById(1).value)" value="Search" />
+    </p>
     <h3>Browse Categoris</h3>
     <p>
         Select from @Model.Count() categories:

@@ -74,7 +74,7 @@
     @foreach (var item in Model.CartItems)
     {
         <tr id="row-@item.RecordId">
-            <td>
+            <td id="firstItem">
                 @Html.ActionLink(item.Product.Title, "Details", "Store", new { id = item.ProductId }, null)
             </td>
             <td>
