@@ -15,16 +15,16 @@ namespace WJStore.Test
     [TestClass]
     public abstract class SeleniumTest {
 
-        const int iisPort = 26641;
+        const int iisPort = 26642;
         private string _applicationName;
         private Process _iisProcess;
  
         protected SeleniumTest(string applicationName) {
             _applicationName = applicationName;
         }
- 
- 
-        public FirefoxDriver FirefoxDriver { get; set; }
+
+
+        public InternetExplorerDriver InternetExplorerDriver { get; set; }
 
         [TestInitialize]
         public void TestInitialize() {
@@ -32,7 +32,7 @@ namespace WJStore.Test
             StartIIS();
  
             // Start Selenium drivers
-            this.FirefoxDriver = new FirefoxDriver();
+            this.InternetExplorerDriver = new InternetExplorerDriver();
         }
  
  
@@ -44,14 +44,14 @@ namespace WJStore.Test
             }
  
             // Stop all Selenium drivers
-            this.FirefoxDriver.Quit();
+            this.InternetExplorerDriver.Quit();
         }
  
  
  
         private void StartIIS() {
             var applicationPath = GetApplicationPath(_applicationName);
-            var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+            var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
  
             _iisProcess = new Process();
             _iisProcess.StartInfo.FileName = programFiles + "\\IIS Express\\iisexpress.exe";
